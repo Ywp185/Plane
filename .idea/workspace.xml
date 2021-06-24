@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9963d528-e078-440d-af93-7d23225728e6" name="Default Changelist" comment="planewarv2.3">
+    <list default="true" id="9963d528-e078-440d-af93-7d23225728e6" name="Default Changelist" comment="planewarv3.0">
       <change beforePath="$PROJECT_DIR$/Plane.py" beforeDir="false" afterPath="$PROJECT_DIR$/Plane.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624554474791</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="planewarv3.0">
+      <created>1624554747704</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1624554747704</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,6 +211,7 @@
     <MESSAGE value="planewarv2.1" />
     <MESSAGE value="planewarv2.2" />
     <MESSAGE value="planewarv2.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="planewarv2.3" />
+    <MESSAGE value="planewarv3.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="planewarv3.0" />
   </component>
 </project>
