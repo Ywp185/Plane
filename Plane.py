@@ -11,6 +11,13 @@ from pygame.locals import *
 from random import *
 
 
+def add_small_enemies(group1, group2, num):
+    for i in range(num):
+        e1 = enemy.SmallEnemy(bg_size)
+        group1.add(e1)
+        group2.add(e1)
+
+
 
 def draw_score_bombs_lifes():
     # 绘制全屏炸弹数量
@@ -33,12 +40,18 @@ def draw_score_bombs_lifes():
 def draw_me():
     screen.blit(me.image1,me.rect)
 
+def draw_small():
+    for each in small_enemies:
+        if each.active:
+            each.move()
+            screen.blit(each.image, each.rect)
+
 pygame.init()
 pygame.mixer.init()
 
 bg_size = width, height = 480, 700
 screen = pygame.display.set_mode(bg_size)
-pygame.display.set_caption("飞机大战V1.2")
+pygame.display.set_caption("飞机大战V1.3")
 background = pygame.image.load("images/background.png").convert()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -95,6 +108,12 @@ life_num = 3
 
 #生成我方飞机
 me = myplane.MyPlane(bg_size)
+
+enemies =pygame.sprite.Group()
+
+# 生成敌方小飞机
+small_enemies = pygame.sprite.Group()
+add_small_enemies(small_enemies, enemies, 9)
 
 # 生成普通子弹
 bullet1 = []
