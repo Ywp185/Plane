@@ -175,7 +175,7 @@ pygame.mixer.init()
 
 bg_size = width, height = 480, 700
 screen = pygame.display.set_mode(bg_size)
-pygame.display.set_caption("飞机大战V2.3")
+pygame.display.set_caption("飞机大战V3.0")
 background = pygame.image.load("images/background.png").convert()
 
 bg1_top=0
@@ -303,6 +303,7 @@ def main():
     global bullet1_index, bullet2_index, delay, bg1_top, bg2_top, \
         bullets, paused, paused_image, level, switch_image, bomb_num, \
             is_double_bullet, is_Triple_Tap
+
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -328,6 +329,20 @@ def main():
                         paused_image = resume_nor_image
                     else:
                         paused_image = pause_nor_image
+            elif event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    if bomb_num:
+                        bomb_num -= 1
+                        bomb_sound.play()
+                        for each in enemies:
+                            if each.rect.bottom > 0:
+                                each.active = False
+            elif event.type == SUPPLY_TIME:
+                supply_sound.play()
+                if choice([True, False]):
+                    bomb_supply.reset()
+                else:
+                    bullet_supply.reset()
                 pygame.quit()
             elif event.type == INVINCIBLE_TIME:
                 me.invincible = False
@@ -395,6 +410,20 @@ def main():
                 me.moveLeft()
             if key_pressed[K_d] or key_pressed[K_RIGHT]:
                 me.moveRight()
+
+
+            # 绘制超级子弹补给并检测是否获得
+            if bullet_supply.active:
+                bullet_supply.move()
+                screen.blit(bullet_supply.image, bullet_supply.rect)
+                if pygame.sprite.collide_mask(bullet_supply, me):
+                    get_bullet_sound.play()
+                    if is_double_bullet:
+                        is_Triple_Tap = True
+                    else:
+                        is_double_bullet = True
+                    pygame.time.set_timer(DOUBLE_BULLET_TIME, 18 * 1000)
+                    bullet_supply.active = False
 
              # 发射子弹
             if not (delay % 10):
