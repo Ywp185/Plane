@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9963d528-e078-440d-af93-7d23225728e6" name="Default Changelist" comment="planewarv1.0" />
+    <list default="true" id="9963d528-e078-440d-af93-7d23225728e6" name="Default Changelist" comment="planewarv2.0">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plane.py" beforeDir="false" afterPath="$PROJECT_DIR$/Plane.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,7 +135,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -140,6 +149,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="planewarv1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="planewarv1.0" />
+    <MESSAGE value="planewarv2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="planewarv2.0" />
   </component>
 </project>
