@@ -38,7 +38,26 @@ def draw_score_bombs_lifes():
     screen.blit(score_text, (10,5))
 
 def draw_me():
+    #绘制我方飞机
     screen.blit(me.image1,me.rect)
+    global me_destroy_index, life_num
+    if me.active:
+        if switch_image:
+            screen.blit(me.image1, me.rect)
+        else:
+            screen.blit(me.image2, me.rect)
+    else:
+        # 毁灭
+        if not (delay % 3):
+            if me_destroy_index == 0:
+                me_down_sound.play()
+            screen.blit(me.destroy_images[me_destroy_index], me.rect)
+            me_destroy_index = (me_destroy_index + 1) % 4
+            if me_destroy_index == 0:
+                life_num -= 1
+                me.reset()
+                pygame.time.set_timer(INVINCIBLE_TIME, 3 * 1000)
+
 
 def draw_small():
     for each in small_enemies:
@@ -51,7 +70,7 @@ pygame.mixer.init()
 
 bg_size = width, height = 480, 700
 screen = pygame.display.set_mode(bg_size)
-pygame.display.set_caption("飞机大战V2.0")
+pygame.display.set_caption("飞机大战V2.1")
 background = pygame.image.load("images/background.png").convert()
 
 bg1_top=0
@@ -141,6 +160,14 @@ delay = 100
 # 标志是否使用超级子弹
 is_double_bullet = False
 is_Triple_Tap = False
+is_double_bullet=False
+is_Triple_Tap=False
+
+# 解除我方无敌状态定时器
+INVINCIBLE_TIME = USEREVENT + 2
+
+# 用于切换图片
+switch_image = True
 
 
 clock=pygame.time.Clock()
@@ -152,6 +179,9 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
+            elif event.type == INVINCIBLE_TIME:
+                me.invincible = False
+                pygame.time.set_timer(INVINCIBLE_TIME, 0)
 
                 bg1_top = (bg1_top + 1) if bg1_top <= 700 else -700
                 bg2_top = (bg2_top + 1) if bg2_top <= 700 else -700
@@ -194,8 +224,17 @@ def main():
 
 
         draw_score_bombs_lifes()
-        draw_me()
-        draw_small()
+
+            draw_small()
+
+    # 检测我方飞机是否被撞
+            enemies_down = pygame.sprite.spritecollide(me, enemies, False, pygame.sprite.collide_mask)
+            if enemies_down and not me.invincible:
+                me.active = False
+                for e in enemies_down:
+                    e.active = False
+            draw_me()
+
 
         delay =(delay-1) if delay else 100
 
