@@ -51,8 +51,12 @@ pygame.mixer.init()
 
 bg_size = width, height = 480, 700
 screen = pygame.display.set_mode(bg_size)
-pygame.display.set_caption("飞机大战V1.3")
+pygame.display.set_caption("飞机大战V2.0")
 background = pygame.image.load("images/background.png").convert()
+
+bg1_top=0
+bg2_top=-700
+
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
@@ -143,11 +147,16 @@ clock=pygame.time.Clock()
 
 
 def main():
-    global bullet1_index,bullet2_index,delay
+    global bullet1_index,bullet2_index,delay,bg1_top,bg2_top
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
+
+                bg1_top = (bg1_top + 1) if bg1_top <= 700 else -700
+                bg2_top = (bg2_top + 1) if bg2_top <= 700 else -700
+                screen.blit(background, (0, bg1_top))
+                screen.blit(background, (0, bg2_top))
                 sys.exit()
 
         screen.blit(background,(0,0))
@@ -186,6 +195,7 @@ def main():
 
         draw_score_bombs_lifes()
         draw_me()
+        draw_small()
 
         delay =(delay-1) if delay else 100
 
